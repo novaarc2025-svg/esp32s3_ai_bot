@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目展示 | ESP32-S3 AI 智能机器人</title>
+    <style>
+        :root {
+            --bg-color: #0a0f1e;
+            --card-bg: #161c2d;
+            --text-main: #e0e6ed;
+            --text-sub: #a0aec0;
+            --accent-1: #00f2fe; /* 青色 - 智能 */
+            --accent-2: #4facfe; /* 蓝色 - 网络 */
+            --glow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+        /* 顶部装饰条 */
+        .top-bar { height: 4px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); width: 100%; position: fixed; top: 0; z-index: 1000; }
+
+        /* 容器 */
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+
+        /* 头部设计 */
+        header { text-align: center; margin-bottom: 50px; position: relative; }
+        header h1 { font-size: 2.8rem; font-weight: 800; background: linear-gradient(to right, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .tagline { color: var(--text-sub); font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; }
+        .scut-badge { position: absolute; top: -30px; right: 0; font-size: 0.9rem; color: #718096; border: 1px solid #4a5568; padding: 4px 10px; border-radius: 20px; font-family: monospace; }
+
+        /* 通用卡片样式 */
+        .card { background-color: var(--card-bg); border: 1px solid #2d3748; border-radius: 12px; padding: 30px; margin-bottom: 30px; transition: all 0.3s ease; }
+        .card:hover { border-color: var(--accent-1); box-shadow: var(--glow); transform: translateY(-3px); }
+        .card-title { font-size: 1.5rem; color: var(--accent-2); margin-bottom: 20px; display: flex; align-items: center; }
+        .card-title::before { content: ''; display: inline-block; width: 6px; height: 24px; background: linear-gradient(to bottom, var(--accent-1), var(--accent-2)); margin-right: 12px; border-radius: 3px; }
+
+        /* 视频/演示区 */
+        .demo-area { text-align: center; }
+        .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; /* 16:9 Aspect Ratio */ border-radius: 8px; overflow: hidden; border: 2px solid #2d3748; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        /* 硬件 specs 区 */
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .spec-item { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid #2d3748; }
+        .spec-label { color: var(--accent-1); font-family: monospace; font-weight: bold; font-size: 0.9rem; }
+        .spec-value { font-size: 1.1rem; color: var(--text-main); margin-top: 5px; }
+
+        /* 软件栈/流程区 */
+        .stack-list { list-style: none; padding-left: 10px; }
+        .stack-list li { position: relative; padding-left: 25px; margin-bottom: 12px; color: var(--text-sub); }
+        .stack-list li::before { content: '⚡'; position: absolute; left: 0; color: var(--accent-2); }
+        .stack-highlight { color: var(--accent-1); font-weight: bold; }
+
+        /* 底部 */
+        footer { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #2d3748; color: #718096; font-size: 0.9rem; }
+        footer a { color: var(--accent-2); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 40px 15px; }
+            .card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="container">
+    <header>
+        <div class="scut-badge">SCUT - Info Eng.</div>
+        <h1>ESP32-S3 AI 智能机器人</h1>
+        <p class="tagline">基于大语言模型与嵌入式视觉的硬件助手</p>
+    </header>
+
+    <section class="card demo-area">
+        <h2 class="card-title">Demo 演示</h2>
+        <div class="video-wrapper">
+            <video controls muted playsinline poster="poster.jpg">
+                <source src="demo-video.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+        <p style="margin-top: 15px; color: var(--text-sub);">
+            演示内容：语音交互、实时物体识别、以及后端 LLM（大模型）的生成式回答。
+        </p>
+    </section>
+
+    <section class="card">
+        <h2 class="card-title">硬件蓝图 (Hardware Specs)</h2>
+        <div class="specs-grid">
+            <div class="spec-item">
+                <div class="spec-label">核心芯片 (SoC)</div>
+                <div class="spec-value">Lexin ESP32-S3</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">处理器</div>
+                <div class="spec-value">Dual-core Xtensa LX7 @240MHz</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">AI 加速</div>
+                <div class="spec-value">支持 AI 向量指令 (Vector Instr.)</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">感知模组</div>
+                <div class="spec-value">OV2640 摄像头 + I2S 麦克风</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">无线连接</div>
+                <div class="spec-value">Wi-Fi 4 + BLE 5.0 Mesh</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2 class="card-title">软件系统栈 (Software Stack)</h2>
+        <ul class="stack-list">
+            <li><strong>开发环境：</strong> 使用 <span class="stack-highlight">ESP-IDF</span> (VS Code 集成) 进行底层驱动编写。</li>
+            <li><strong>语音处理：</strong> 本地实现 Wake-word 检测（使用 ESP-Skainet），语音转文字（STT）通过网络 API 完成。</li>
+            <li><strong>AI 核心：</strong> 接入大语言模型 (<span class="stack-highlight">LLM, 如 GPT-4o 或 通义千问</span>) API，实现生成式多轮对话。</li>
+            <li><strong>通信协议：</strong> 使用 MQTT 或 WebSocket 与后端进行双向实时数据交换。</li>
+        }
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <p>Deployed on GitHub Pages | Developed by novaarc2025-svg</p>
+    <p><a href="https://github.com/novaarc2025-svg/ESP32_AI_Robot">查看 Github 仓库源码</a></p>
+</footer>
+
+</body>
+</html>
